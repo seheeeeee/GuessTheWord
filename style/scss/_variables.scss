@@ -1,0 +1,96 @@
+// colors
+$black: #1f1f1f;
+$white: #FEFBF3;
+$red: #D57E7E;
+$beige: #F8F0DF;
+$blue: #79B4B7; 
+$gray: #9D9D9D;
+$green: #C6D57E;
+
+//font
+$f-family: 'Poppins', sans-serif;
+$f-w-light: 200;
+$f-w-medium: 400;
+$f-w-bold: 700;
+
+@mixin font($size: 17px, $color: $black, $weight: $f-w-light){
+    font: {
+        family: $f-family;
+        size: $size;
+        weight: $weight;
+    }
+    color: $color;
+    @content;
+}
+
+//border
+$b-style: solid;
+$b-color: $gray;
+$border: 0.7px $b-style $b-color;
+$radius: 10px;
+
+//buttons mixin
+@mixin button($color: darken($blue, 10%)){
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: $color;
+    border-radius: $radius;
+    box-shadow: 1px 2px 5px rgba(0,0,0,0.2);
+    transition: all .3s;
+    @include font(14px, $white, $f-w-bold);
+
+    &:hover, &:active{
+        background-color: darken($color, 10%);
+    }
+    @content;
+}
+
+//position mixin
+@mixin position($position: absolute, $x, $y){
+    @if($x == 50% and $y == 50%){
+        transform: translate(-50%, -50%);
+    }@else if($x == 50%){
+        transform: translateX(-50%);
+    }@else if($y == 50%){
+        transform: translateY(-50%);
+    }
+    
+    position: $position;
+    left: $x;
+    top: $y;
+}
+
+//prefix mixin
+@mixin prefix($w, $h, $p: absolute){
+    content: '';
+    display: block;
+    width: $w;
+    height: $h;
+    position: $p;
+    @content;
+}
+
+//clear mixin
+@mixin clear{
+    &::after{
+        content: '';
+        display: block;
+        clear: both;
+    }
+}
+
+//responsive
+$tablet: 600px;
+$desktop: 992px;
+
+@mixin tablet{
+    @media screen and (min-width: $tablet) and (max-width: $desktop) {
+        @content;
+    }
+}
+
+@mixin desktop{
+    @media screen and (min-width: $desktop + 1) {
+        @content;
+    }
+}

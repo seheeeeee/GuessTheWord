@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;700;800;900&display=swap');
+@import 'variables';
+
+*{
+    margin: 0;
+    padding: 0; 
+    box-sizing: border-box;
+    @include font;
+}
+ul, ol, li{list-style: none;}
+a{@include font;}
+button{
+    outline: none;
+    border: 0;
+    cursor: pointer;
+    background: $white;
+}
+
+//default mobile
+#wrap{
+    @include position(absolute, 50%, 50%);
+    $w: 85%;
+    $tabletW: 50%;
+    $desktopW: 40%; 
+    $marginBtm: 30px;
+
+    width: $w;
+    margin: 0 auto;
+    text-align: center;
+
+    h1{
+        @include font(30px, darken($blue, 20%), $f-w-bold);
+        margin-bottom: $marginBtm;
+        white-space: nowrap;
+    }
+
+    .board{
+        height: 500px;
+        margin-bottom: $marginBtm + 10px;
+        border-radius: $radius;
+        background-color: lighten($gray, 30%);
+        @include position(relative, 0, 0);
+    }
+
+    .ctrls{
+        button{
+            @include button;
+            margin-right: 10px;
+        }
+        .resetBtn{
+            @include button($red);
+            margin-right: 0;
+        }
+    }
+
+    @include tablet {
+        & {
+            width: $tabletW;
+            min-width: 510px;
+        }
+
+        h1{
+            @include font(45px, darken($red, 20%), $f-w-bold);
+        }
+
+        .board{
+            height: 600px;
+            background-color: lighten($beige, 3%);
+        }
+
+        .ctrls{
+            button, .resetBtn{
+                padding: 10px 30px;
+                font-size: 20px;
+            }
+        }
+    }
+
+    @include desktop{
+        &{
+            width: $desktopW;
+            min-width: 600px;
+            max-width: 700px;
+        }
+        h1{
+            @include font(60px, darken($blue, 20%), $f-w-bold);
+        }
+        .board{
+            height: 700px;
+        }
+        .ctrls{
+            button, .resetBtn{
+                margin-right: 5%;
+                width: 45%;
+                padding: 15px 0;
+                font-size: 22px;
+                letter-spacing: 1px;
+            }
+            .resetBtn{margin-right: 0;}
+        }
+    }
+}
+
+.board > ul{
+    width: 90%;
+    height: 90%;
+    @include position(absolute, 50%, 50%);
+
+    li{
+        height: 20%;
+        display: flex;
+        justify-content: space-between;
+
+        span{
+            width: 100%;
+            // height: 100%;
+            padding-top: 5.5%;
+            margin: 5px 10px 5px 0;
+            background-color: $white;
+            text-transform: uppercase;
+            &:last-of-type{margin-right: 0;}
+            @include font(24px,$black,$f-w-bold);
+
+            @include tablet{
+                background-color: lighten($gray, 32%);
+                padding-top: 6%;
+                font-size: 30px;
+            }
+
+            @include desktop{
+                padding-top: 6%;
+                font-size: 36px;
+            }
+        }
+        span.codeA{
+            background-color: $red;
+        }
+        span.codeB{
+            background-color: $green;
+        }
+        &.codeC span{
+            background-color: $blue;
+        }
+
+        &:nth-of-type(n+6){
+            display: none;
+        }
+    }
+    
+
+}
+
+.answer{
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s;
+    &.play{
+        opacity: 1;
+        visibility: visible;
+    }
+
+    width: 110%;
+    height: 200px;
+    background-color: rgba($black,0.5);
+    @include position(absolute, 50%, 50%);
+    z-index: 10;
+    span{
+        width: 100%;
+        display: block;
+        padding-top: 40px;
+        font-weight: $f-w-medium;
+        font-size: 20px;
+        color: $white;
+    }
+
+    form{
+        display: flex;
+        height: 50%;
+        align-items: center;
+        justify-content: space-around;
+    }
+    input{
+        width: 65%;
+        height: 40px;
+        border: none;
+        outline: none;
+        text-indent: 10px;
+        &:invalid{
+            background-color: rgba($red, 0.7);
+        }
+    }
+    .submitBtn{
+        width: 20%;
+        height: 40px;
+        @include button($white);
+        color: darken($gray,10%);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+}
+
+.desc{
+    display: none;
+    @include position(absolute, 4%, 29%);
+    width: 350px;
+    padding: 20px 10px;
+    @include desktop{
+        @include position(absolute, -417px, 296px);
+    }
+    @include tablet{
+        @include position(absolute, 4%, 50%);
+    }
+
+    li{
+        height: 70px;
+        line-height: 70px;
+        text-align: right;
+        position: relative;
+    }
+
+    span{
+        position: absolute;
+        top: 50%;
+        right: -50px;
+        transform: translateY(-50%);
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        background-color: $white;
+        box-shadow: 0 0 2px rgba($black,0.4);
+
+        &.codeB{
+            background-color: $green;
+        }
+        &.codeA{
+            background-color: $red;
+        }
+        @include tablet{
+            &{
+                background-color: lighten($gray, 32%);
+            }
+        }
+    }
+}
+.infoBtn{
+    @include position(absolute,93%, 12px);
+    display: block;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    background-color: $black;
+    color: $white;
+    font-weight: 500;
+    border-radius: 50%;
+    @include tablet{top: 24px;}
+    @include desktop{top: 40px; left: 95%;}
+}

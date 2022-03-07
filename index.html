@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/css/common.css">
+    <script src="js/main.js" defer></script>
+    <title>Guess the Word!</title>
+</head>
+<body>
+    <div id="wrap">
+        <h1>Guess the Word!</h1>
+        <section class="board">
+            <ul>
+            </ul>
+        </section>
+        <section class="ctrls">
+            <button class="playBtn">PLAY</button>
+            <button class="resetBtn">RESET</button>
+        </section>
+        <aside class="answer">
+            <span>Write a 5-letter English word</span>
+
+            <form action="">
+                <input type="text" class="inputBox" pattern="[A-Za-z]+" maxlength="5">
+                <button type="submit" class="submitBtn">doen</button>
+            </form>
+        </aside>
+        <button class="infoBtn">i</button>
+        <aside class="desc">
+            <ul>
+                <li>
+                    if everything is wrong: <span class="none"></span>
+                </li>
+                <li>
+                    if only the location is correct: <span class="codeB"></span>
+                </li>
+                <li>
+                    if both the location and spell is right: <span class="codeA"></span>
+                </li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>
